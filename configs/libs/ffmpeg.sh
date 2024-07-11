@@ -38,5 +38,5 @@ fi
 if [[ "$GIT_FFMPEG_COMMIT" != "" ]] ;then
     export GIT_COMMIT="$GIT_FFMPEG_COMMIT"
 else
-    export GIT_COMMIT=n5.1.4 #origin/release/5.1
+    export GIT_COMMIT=n5.1.3-ijk #origin/release/5.1
 fi
