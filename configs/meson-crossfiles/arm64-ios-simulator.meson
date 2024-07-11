@@ -23,6 +23,8 @@ objcpp_args = ['-arch', 'arm64', '-mios-simulator-version-min=9.0', '-fembed-bit
 root = '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer'
 has_function_printf = true
 has_function_hfkerhisadf = false
+# 解决Apple silicon（M1&M2&M3）meson测试的问题
+needs_exe_wrapper = true
 
 [host_machine]
 system = 'darwin'
