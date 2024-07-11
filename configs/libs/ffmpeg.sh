@@ -32,7 +32,7 @@ export PRE_COMPILE_TAG=ffmpeg-5.1.4-240628162045
 if [[ "$GIT_FFMPEG_UPSTREAM" != "" ]] ;then
     export GIT_UPSTREAM="$GIT_FFMPEG_UPSTREAM"
 else
-    export GIT_UPSTREAM=https://github.com/FantasySwords/FFMPEG-IJK.git
+    export GIT_UPSTREAM=https://github.com/FFmpeg/FFmpeg.git
 fi
 
 if [[ "$GIT_FFMPEG_COMMIT" != "" ]] ;then
