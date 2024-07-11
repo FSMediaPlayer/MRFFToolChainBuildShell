@@ -1,0 +1,94 @@
+From 1e5b7bb486bab85c19d6a035c5d6e1c95f985b81 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E4=BD=95=E5=81=A5=E6=BA=90?= <jianyuan.he@1905.com>
+Date: Thu, 11 Jul 2024 14:34:13 +0800
+Subject: [PATCH] dynamic_hdr_vivid
+
+---
+ libavcodec/dynamic_hdr_vivid.c         | 14 +++++++-------
+ libavutil/hdr_dynamic_vivid_metadata.h | 12 ++++++------
+ 2 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/libavcodec/dynamic_hdr_vivid.c b/libavcodec/dynamic_hdr_vivid.c
+index d689669dec..6402518cb9 100644
+--- a/libavcodec/dynamic_hdr_vivid.c
++++ b/libavcodec/dynamic_hdr_vivid.c
+@@ -102,16 +102,16 @@ int ff_parse_itu_t_t35_to_dynamic_hdr_vivid(AVDynamicHDRVivid *s, const uint8_t
+                                 return AVERROR_INVALIDDATA;
+                             tm_params->three_Spline_num = get_bits(gb, 1) + 1;
+                             for (int j = 0; j < tm_params->three_Spline_num; j++) {
+-                                tm_params->three_Spline_TH_mode = get_bits(gb, 2);
+-                                if (tm_params->three_Spline_TH_mode == 0 || tm_params->three_Spline_TH_mode == 2) {
++                                tm_params->three_Spline_TH_mode[j] = get_bits(gb, 2);
++                                if (tm_params->three_Spline_TH_mode[j] == 0 || tm_params->three_Spline_TH_mode[j] == 2) {
+                                     if (get_bits_left(gb) < 8)
+                                         return AVERROR_INVALIDDATA;
+-                                    tm_params->three_Spline_TH_enable_MB = (AVRational){get_bits(gb, 8),  255};
++                                    tm_params->three_Spline_TH_enable_MB[j] = (AVRational){get_bits(gb, 8),  255};
+                                 }
+-                                tm_params->three_Spline_TH_enable = (AVRational){get_bits(gb, 12),  4095};
+-                                tm_params->three_Spline_TH_Delta1 = (AVRational){get_bits(gb, 10),  1023};
+-                                tm_params->three_Spline_TH_Delta2 = (AVRational){get_bits(gb, 10),  1023};
+-                                tm_params->three_Spline_enable_Strength = (AVRational){get_bits(gb,  8),  255};
++                                tm_params->three_Spline_TH_enable[j] = (AVRational){get_bits(gb, 12),  4095};
++                                tm_params->three_Spline_TH_Delta1[j] = (AVRational){get_bits(gb, 10),  1023};
++                                tm_params->three_Spline_TH_Delta2[j] = (AVRational){get_bits(gb, 10),  1023};
++                                tm_params->three_Spline_enable_Strength[j] = (AVRational){get_bits(gb,  8),  255};
+                             }
+                         } else {
+                             tm_params->three_Spline_num     = 1;
+diff --git a/libavutil/hdr_dynamic_vivid_metadata.h b/libavutil/hdr_dynamic_vivid_metadata.h
+index a34f83072c..4ceddc539d 100644
+--- a/libavutil/hdr_dynamic_vivid_metadata.h
++++ b/libavutil/hdr_dynamic_vivid_metadata.h
+@@ -126,42 +126,42 @@ typedef struct AVHDRVividColorToneMappingParams {
+      * The mode of three Spline. the value shall be in the range
+      * of 0 to 3, inclusive.
+      */
+-    int three_Spline_TH_mode;
++    int three_Spline_TH_mode[2];
+ 
+     /**
+      * three_Spline_TH_enable_MB is in the range of 0.0 to 1.0, inclusive
+      * and in multiples of 1.0/255.
+      *
+      */
+-    AVRational three_Spline_TH_enable_MB;
++    AVRational three_Spline_TH_enable_MB[2];
+ 
+     /**
+      * 3Spline_TH_enable of three Spline.
+      * The value shall be in the range of 0.0 to 1.0, inclusive.
+      * and in multiples of 1.0/4095.
+      */
+-    AVRational three_Spline_TH_enable;
++    AVRational three_Spline_TH_enable[2];
+ 
+     /**
+      * 3Spline_TH_Delta1 of three Spline.
+      * The value shall be in the range of 0.0 to 0.25, inclusive,
+      * and in multiples of 0.25/1023.
+      */
+-    AVRational three_Spline_TH_Delta1;
++    AVRational three_Spline_TH_Delta1[2];
+ 
+     /**
+      * 3Spline_TH_Delta2 of three Spline.
+      * The value shall be in the range of 0.0 to 0.25, inclusive,
+      * and in multiples of 0.25/1023.
+      */
+-    AVRational three_Spline_TH_Delta2;
++    AVRational three_Spline_TH_Delta2[2];
+ 
+     /**
+      * 3Spline_enable_Strength of three Spline.
+      * The value shall be in the range of 0.0 to 1.0, inclusive,
+      * and in multiples of 1.0/255.
+      */
+-    AVRational three_Spline_enable_Strength;
++    AVRational three_Spline_enable_Strength[2];
+ } AVHDRVividColorToneMappingParams;
+ 
+ 
+-- 
+2.41.0
+
