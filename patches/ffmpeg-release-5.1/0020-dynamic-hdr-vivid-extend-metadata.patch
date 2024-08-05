@@ -9,10 +9,10 @@ Subject: [PATCH] dynamic_hdr_vivid
  2 files changed, 13 insertions(+), 13 deletions(-)
 
 diff --git a/libavcodec/dynamic_hdr_vivid.c b/libavcodec/dynamic_hdr_vivid.c
-index d689669dec..6402518cb9 100644
+index d689669dec..4bafe57c79 100644
 --- a/libavcodec/dynamic_hdr_vivid.c
 +++ b/libavcodec/dynamic_hdr_vivid.c
-@@ -102,16 +102,16 @@ int ff_parse_itu_t_t35_to_dynamic_hdr_vivid(AVDynamicHDRVivid *s, const uint8_t
+@@ -102,20 +102,20 @@ int ff_parse_itu_t_t35_to_dynamic_hdr_vivid(AVDynamicHDRVivid *s, const uint8_t
                                  return AVERROR_INVALIDDATA;
                              tm_params->three_Spline_num = get_bits(gb, 1) + 1;
                              for (int j = 0; j < tm_params->three_Spline_num; j++) {
@@ -36,6 +36,11 @@ index d689669dec..6402518cb9 100644
                              }
                          } else {
                              tm_params->three_Spline_num     = 1;
+-                            tm_params->three_Spline_TH_mode = 0;
++                            tm_params->three_Spline_TH_mode[0] = 0;
+                         }
+ 
+                     }
 diff --git a/libavutil/hdr_dynamic_vivid_metadata.h b/libavutil/hdr_dynamic_vivid_metadata.h
 index a34f83072c..4ceddc539d 100644
 --- a/libavutil/hdr_dynamic_vivid_metadata.h

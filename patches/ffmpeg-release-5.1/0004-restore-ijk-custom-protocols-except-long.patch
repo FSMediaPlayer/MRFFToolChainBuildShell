@@ -225,7 +225,6 @@ index 0000000..25faad1
 +IJK_DUMMY_PROTOCOL(ijksegment);
 +IJK_DUMMY_PROTOCOL(ijktcphook);
 +IJK_DUMMY_PROTOCOL(ijkio);
-+IJK_DUMMY_PROTOCOL(ijkdownload_adapter);
 +
 +#define IJK_FF_DEMUXER(x)                                                                          \
 +extern AVInputFormat ff_##x##_demuxer;                                                               \
@@ -269,7 +268,6 @@ index 6ee62a5..8c67f34 100644
 +extern const URLProtocol ff_ijksegment_protocol;
 +extern const URLProtocol ff_ijktcphook_protocol;
 +extern const URLProtocol ff_ijkio_protocol;
-+extern const URLProtocol ff_ijkdownload_adapter_protocol;
 +
  #include "libavformat/protocol_list.c"
  

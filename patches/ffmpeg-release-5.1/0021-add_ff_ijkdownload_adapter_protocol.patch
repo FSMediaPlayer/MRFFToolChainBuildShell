@@ -1,0 +1,37 @@
+From 79ac64f314142d1dbcd5836a2d909ac6d32994b7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E4=BD=95=E5=81=A5=E6=BA=90?= <jianyuan.he@1905.com>
+Date: Mon, 5 Aug 2024 17:06:03 +0800
+Subject: [PATCH] 0021-add_ff_ijkdownload_adapter_protocol.patch
+
+---
+ libavformat/ijkutils.c  | 1 +
+ libavformat/protocols.c | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/libavformat/ijkutils.c b/libavformat/ijkutils.c
+index 25faad1155..53f4f13fc0 100644
+--- a/libavformat/ijkutils.c
++++ b/libavformat/ijkutils.c
+@@ -65,6 +65,7 @@ IJK_DUMMY_PROTOCOL(ijkhttphook);
+ IJK_DUMMY_PROTOCOL(ijksegment);
+ IJK_DUMMY_PROTOCOL(ijktcphook);
+ IJK_DUMMY_PROTOCOL(ijkio);
++IJK_DUMMY_PROTOCOL(ijkdownload_adapter);
+ 
+ #define IJK_FF_DEMUXER(x)                                                                          \
+ extern AVInputFormat ff_##x##_demuxer;                                                               \
+diff --git a/libavformat/protocols.c b/libavformat/protocols.c
+index 8fada6100c..6233ae9f7a 100644
+--- a/libavformat/protocols.c
++++ b/libavformat/protocols.c
+@@ -80,6 +80,7 @@ extern const URLProtocol ff_ijkmediadatasource_protocol;
+ extern const URLProtocol ff_ijksegment_protocol;
+ extern const URLProtocol ff_ijktcphook_protocol;
+ extern const URLProtocol ff_ijkio_protocol;
++extern const URLProtocol ff_ijkdownload_adapter_protocol;
+ 
+ #include "libavformat/protocol_list.c"
+ 
+-- 
+2.41.0
+
